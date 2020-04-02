@@ -31,12 +31,14 @@ public class СreationOf_URL {
         InputStream in ;
         try{
             in = urlConnection.getInputStream();
+            
             Scanner scanner = new Scanner(in);
             scanner.useDelimiter("\\A");
             
             boolean hasInput = scanner.hasNext();
             if(hasInput){
                 return scanner.next();
+                
             } else {
                 return null;
             }
