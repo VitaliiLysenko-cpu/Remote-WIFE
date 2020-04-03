@@ -8,23 +8,23 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.remotewife.polo.Job;
+import com.example.remotewife.pojo.Task;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private TextView jobText;
-    private Button jobChoice;
+    private TextView taskText;
+    private Button taskChoice;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        jobChoice = findViewById(R.id.job_choice_button);
-        jobText = findViewById(R.id.job_text);
-        jobChoice.setOnClickListener(this);
+        taskChoice = findViewById(R.id.task_choice_button);
+        taskText = findViewById(R.id.task_text);
+        taskChoice.setOnClickListener(this);
     }
     
     /**
@@ -34,22 +34,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      */
     @Override
     public void onClick(View v) {
-        jobText.setText("");
-        Server.getInstance()
+        taskText.setText("");
+        NetworkClient.getInstance()
                 .getJSONApi()
                 .getJobWithActivity()
-                .enqueue(new Callback<Job>() {
+                .enqueue(new Callback<Task>() {
                     @Override
-                    public void onResponse(@NonNull Call<Job> call, @NonNull Response<Job> response) {
-                        Job job = response.body();
+                    public void onResponse(@NonNull Call<Task> call, @NonNull Response<Task> response) {
+                        Task task = response.body();
                         
-                        jobText.append(job.getActivity() + "\n");
-                        jobText.append(job.getAccessibility() + "\n");
-                        jobText.append(job.getType() + "\n");
-                        jobText.append(job.getParticipants() + "\n");
-                        jobText.append(job.getPrice() + "\n");
-                        jobText.append(job.getLink() + "\n");
-                        jobText.append(job.getKey() + "\n");
+                        taskText.append(task.getActivity() + "\n");
+                        taskText.append(task.getAccessibility() + "\n");
+                        taskText.append(task.getType() + "\n");
+                        taskText.append(task.getParticipants() + "\n");
+                        taskText.append(task.getPrice() + "\n");
+                        taskText.append(task.getLink() + "\n");
+                        taskText.append(task.getKey() + "\n");
                         
                     }
                     
@@ -60,8 +60,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                      * @param call
                      * @param t
                      */
-                    public void onFailure(Call<Job> call, Throwable t) {
-                        jobText.append("Error occurred while getting request!");
+                    public void onFailure(Call<Task> call, Throwable t) {
+                        taskText.append("Error occurred while getting request!");
                         t.printStackTrace();
                         
                     }

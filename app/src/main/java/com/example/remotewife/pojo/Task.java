@@ -1,9 +1,9 @@
-package com.example.remotewife.polo;
+package com.example.remotewife.pojo;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Job {
+public class Task {
     @SerializedName("activity")
     @Expose
     private String activity;
